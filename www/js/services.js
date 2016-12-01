@@ -8,6 +8,24 @@ angular.module("services",[])
 	};
 }])
 
+.factory('addParticipantService', ['$http', function($http){
+	return {
+		postParticipant: function( participantId, groupId){
+			var data = {
+			  "id": participantId,
+			};
+
+		return $http({
+								method: 'POST',
+								url: 'http://localhost:8080/CreativeAPI/brainwriting/'+groupId+'/participante',
+								data: data,
+								headers: { 'Content-Type': "application/json;charset=UTF-8" }
+						})
+		}
+	};
+
+}])
+
 //----------------------------------------------------------------------------
 
 	.factory('getGroupsService', ['$http', function($http){
@@ -73,6 +91,14 @@ angular.module("services",[])
 		};
 	}])
 
+	.factory('getIdeaService', ['$http', function($http){
+		return {
+			getIdea: function(id){
+				return  $http.get('http://localhost:8080/CreativeAPI/brainwriting/ideia/'+ id);
+			}
+		};
+	}])
+
 	.factory('addIdeaService', ['$http', function($http){
 		return {
 			postIdea: function(autor, group, texto, titulo){
@@ -117,39 +143,38 @@ angular.module("services",[])
 
 	.factory('addIncrementService', ['$http', function($http){
 		return {
-			postIdea: function(autor, group, texto, titulo){
+			postIdea: function(autorId, groupId, texto){
 				var data = {
-				"autor": autor,
-				"data": {
-					"calendarType": "string",
-					"fieldsComputed": 0,
-					"fieldsNormalized": 0,
-					"firstDayOfWeek": 0,
-					"lenient": true,
-					"minimalDaysInFirstWeek": 0,
-					"time": "2016-12-01T02:12:49.755Z",
-					"timeInMillis": 0,
-					"timeZone": {
-						"displayName": "string",
-						"dstsavings": 0,
-						"id": "string",
-						"rawOffset": 0
+					"autor":{
+						"id": autorId
 					},
-					"weekCountData": {},
-					"weekDateSupported": true,
-					"weekYear": 0,
-					"weeksInWeekYear": 0,
-					"zoneShared": true
-				},
-				"numeroAvaliacoes": 0,
-				"numeroComentarios": 0,
-				"texto": texto,
-				"titulo": titulo
+				  "data": {
+				    "calendarType": "string",
+				    "fieldsComputed": 0,
+				    "fieldsNormalized": 0,
+				    "firstDayOfWeek": 0,
+				    "lenient": true,
+				    "minimalDaysInFirstWeek": 0,
+				    "time": "2016-12-01T16:06:45.464Z",
+				    "timeInMillis": 0,
+				    "timeZone": {
+				      "displayName": "string",
+				      "dstsavings": 0,
+				      "id": "string",
+				      "rawOffset": 0
+				    },
+				    "weekCountData": {},
+				    "weekDateSupported": true,
+				    "weekYear": 0,
+				    "weeksInWeekYear": 0,
+				    "zoneShared": true
+				  },
+					"texto": texto
 				};
 
 			return $http({
 									method: 'POST',
-									url: 'http://localhost:8080/CreativeAPI/brainwriting/'+ group +'/ideia',
+									url: 'http://localhost:8080/CreativeAPI/brainwriting/ideia/'+ groupId +'/comentario',
 									data: data,
 									headers: { 'Content-Type': "application/json;charset=UTF-8" }
 							})

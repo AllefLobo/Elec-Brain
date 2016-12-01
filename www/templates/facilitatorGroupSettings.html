@@ -8,15 +8,15 @@
         <form id="groupSettingsFacilitator-form11" class="list">
             <label class="item item-input" id="groupSettingsFacilitator-input9">
                 <span class="input-label">Name</span>
-                <input type="text" placeholder="" value="{{group.titulo}}">
+                <input type="text" placeholder="" ng-model="group.titulo" value="{{group.titulo}}">
             </label>
             <label class="item item-input" id="groupSettingsFacilitator-input10">
                 <span class="input-label">Description</span>
-                <input type="text" placeholder="" value="{{group.descricao}}">
+                <input type="text" placeholder="" ng-model="group.descricao" value="{{group.descricao}}">
             </label>
             <label class="item item-input" id="groupSettingsFacilitator-input11">
                 <span class="input-label">Topic</span>
-                <input type="text" placeholder="" value="{{group.gatilho}}">
+                <input type="text" placeholder="" ng-model="group.gatilho" value="{{group.gatilho}}">
             </label>
 
 						<div class="list">
@@ -24,7 +24,7 @@
 						    <div class="input-label">
 						      Status
 						    </div>
-						    <select value="{{group.fase}}">
+						    <select ng-model="group.fase" value="{{group.fase}}">
 						      <option value="NOVA">Open</option>
 						      <option value="RECEBENDO_IDEIAS">Think</option>
 						      <option value="AVALIANDO_IDEIAS">Evaluate</option>
@@ -60,7 +60,7 @@
               <span class="input-label">New Participant </span>
               <input ng-model="participant" type="text">
             </label>
-            <button class="button button-full button-positive" ng-click="add(participant)">Add</button>
+            <button class="button button-full button-positive" ng-click="add(participant, group.id)">Add</button>
           </div>
         </ion-content>
       </ion-modal-view>

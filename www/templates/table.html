@@ -11,7 +11,8 @@
             <ion-list id="table-list6" ui-sref="table({groupId : group.id })">
                 <ion-item id="" >{{idea.texto}}</ion-item>
             </ion-list>
-            <button id="table-button10" class="button button-positive  button-block icon-left ion-android-add" ng-click="comment.show()">increase</button>
+						<button class="button button-positive  button-block icon-left ion-android-search" ng-click="getComments.show()">see increments</button>
+            <button class="button button-positive  button-block icon-left ion-android-add" ng-click="newComment.show()">increase</button>
         </div>
     </ion-content>
 </ion-view>
@@ -38,7 +39,7 @@
       <ion-modal-view>
         <ion-header-bar class="bar bar-header bar-positive">
           <h1 class="title">New increment</h1>
-          <button class="button button-clear button-primary" ng-click="comment.hide()">Cancel</button>
+          <button class="button button-clear button-primary" ng-click="newComment.hide()">Cancel</button>
         </ion-header-bar>
         <ion-content class="padding">
           <div class="list">
@@ -48,6 +49,23 @@
             </label>
             <button class="button button-full button-positive" ng-click="increase(increment)">increase</button>
           </div>
+        </ion-content>
+      </ion-modal-view>
+</script>
+
+<script id="templates/getComments.html" type="text/ng-template">
+      <ion-modal-view>
+        <ion-header-bar class="bar bar-header bar-positive">
+          <h1 class="title">New increment</h1>
+          <button class="button button-clear button-primary" ng-click="getComments.hide()">Cancel</button>
+        </ion-header-bar>
+
+        <ion-content class="padding">
+					<ul class="list">
+				    <li class="item" ng-repeat="comment in comments">
+				    	{{comment.texto}}
+				    </li>
+					</ul>
         </ion-content>
       </ion-modal-view>
 </script>

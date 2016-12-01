@@ -12,7 +12,7 @@ angular.module("controllers",[])
 	}])
 
   .controller('ConfigController',['$scope', function($scope){
-    $scope.nome = "João";
+    $scope.nome = "";
   }])
 
   .controller('OpenTabController',['getGroupsService','$scope', '$state', function TabController (getGroupsService, $scope, $state) {
@@ -79,7 +79,7 @@ angular.module("controllers",[])
 		});
 	}])
 
-	.controller('FacilitatorGroupSettingsController', ['$scope', '$stateParams', '$ionicHistory', 'getUniqueGroupService', 'updateUniqueGroupService', '$state', '$ionicModal', function($scope, $stateParams, $ionicHistory, getUniqueGroupService, updateUniqueGroupService, $state, $ionicModal){
+	.controller('FacilitatorGroupSettingsController', ['$scope', '$stateParams', '$ionicHistory', 'getUniqueGroupService', 'updateUniqueGroupService', '$state', '$ionicModal', 'addParticipantService', function($scope, $stateParams, $ionicHistory, getUniqueGroupService, updateUniqueGroupService, $state, $ionicModal, addParticipantService){
 		$scope.goBack = function() {
     	$ionicHistory.goBack();
   	};
@@ -91,7 +91,7 @@ angular.module("controllers",[])
 
 		$scope.save = function(group){
 			var usuario = JSON.parse(window.localStorage.getItem('usuario'));
-			group['fase'] = "RECEBENDO_IDEIAS";
+			//group['fase'] = "RECEBENDO_IDEIAS";
 			group['facilitador'] = {'id': usuario['id'] };
 			console.log(group);
 
@@ -101,16 +101,10 @@ angular.module("controllers",[])
 			});
 		};
 
-		$scope.add = function(participant){
-			var usuario = JSON.parse(window.localStorage.getItem('usuario'));
-			var autor = {
-				"email": usuario['email'],
-				"id": usuario['id'],
-				"nome": usuario['nome']
-			};
-			addIdeaService.postIdea(autor, $stateParams.groupId, idea, idea).then(function(response){
+
+		$scope.add = function(participant, groupId){
+			addParticipantService.postParticipant(participant, groupId).then(function(response){
 				console.log(response);
-				$scope.modal.remove();
 			});
 		};
 
@@ -151,10 +145,6 @@ angular.module("controllers",[])
 			});
 		};
 
-		$scope.increase = function(increment){
-
-		};
-
 
 
 	  $ionicModal.fromTemplateUrl('templates/newIdea.html', {
@@ -167,8 +157,8 @@ angular.module("controllers",[])
 		$ionicModal.fromTemplateUrl('templates/newComment.html', {
 	    scope: $scope,
 			animation: 'slide-in-up'
-	  }).then(function(comment) {
-	    $scope.comment = comment;
+	  }).then(function(newComment) {
+	    $scope.newComment = newComment;
   	});
 
 	}])
