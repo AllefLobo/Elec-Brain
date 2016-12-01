@@ -1,0 +1,67 @@
+<div class="bar bar-header">
+  <button class="button icon ion-arrow-left-c" ng-click="goBack()"></button>
+  <h1 class="title">Electronic Brainwriting</h1>
+</div>
+
+<ion-view title="Group Settings Participant">
+    <ion-content padding="true" class="has-header">
+        <form id="groupSettingsFacilitator-form11" class="list">
+            <label class="item item-input" id="groupSettingsFacilitator-input9">
+                <span class="input-label">Name</span>
+                <input type="text" placeholder="" value="{{group.titulo}}">
+            </label>
+            <label class="item item-input" id="groupSettingsFacilitator-input10">
+                <span class="input-label">Description</span>
+                <input type="text" placeholder="" value="{{group.descricao}}">
+            </label>
+            <label class="item item-input" id="groupSettingsFacilitator-input11">
+                <span class="input-label">Topic</span>
+                <input type="text" placeholder="" value="{{group.gatilho}}">
+            </label>
+
+						<div class="list">
+							<label class="item item-input item-select">
+						    <div class="input-label">
+						      Status
+						    </div>
+						    <select value="{{group.fase}}">
+						      <option value="NOVA">Open</option>
+						      <option value="RECEBENDO_IDEIAS">Think</option>
+						      <option value="AVALIANDO_IDEIAS">Evaluate</option>
+									<option value="ENCERRADA">Rank</option>
+						    </select>
+						  </label>
+						</div>
+
+						<div class="button-bar">
+							<button  class="button button-balanced  button-block icon ion-plus" ng-click="newParticipant.show()">Add participant</button>
+						</div>
+
+
+						<div id="groupSettingsFacilitator-button-bar4" class="button-bar">
+		            <button id="groupSettingsFacilitator-button8" class="button button-positive  button-block icon ion-edit" ng-click="save(group)">Save</button>
+		            <button ui-sref="table({groupId : group.id })" class="button button-positive  button-block icon ion-android-open">View Table</button>
+		        </div>
+        </form>
+
+    </ion-content>
+</ion-view>
+
+
+<script id="templates/addParticipant.html" type="text/ng-template">
+      <ion-modal-view>
+        <ion-header-bar class="bar bar-header bar-balanced">
+          <h1 class="title">Adding participant</h1>
+          <button class="button button-clear button-primary" ng-click="newParticipant.hide()">Cancel</button>
+        </ion-header-bar>
+        <ion-content class="padding">
+          <div class="list">
+            <label class="item item-input">
+              <span class="input-label">New Participant </span>
+              <input ng-model="participant" type="text">
+            </label>
+            <button class="button button-full button-positive" ng-click="add(participant)">Add</button>
+          </div>
+        </ion-content>
+      </ion-modal-view>
+</script>

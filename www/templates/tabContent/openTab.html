@@ -1,0 +1,15 @@
+<ion-view title="Open Tab">
+    <ion-content padding="true" class="has-header">
+        <div class="list card">
+          <ion-list>
+            <ion-spinner class="spinner" ng-show="loading" ></ion-spinner>
+            <ion-item class="item-avatar item-icon-right"
+              ng-repeat="item in groups">
+                <h2>Group name: {{item.titulo}}</h2>
+                <p>Description: {{item.descricao}}</p>
+                <a class="icon ion-ios-settings-strong" ui-sref="facilitatorGroupSettings({id: item.id})" ></a>
+            </ion-item>
+          </ion-list>
+        </div>
+    </ion-content>
+</ion-view>

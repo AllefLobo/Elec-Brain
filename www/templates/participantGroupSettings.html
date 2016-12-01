@@ -1,0 +1,26 @@
+<div class="bar bar-header">
+  <button class="button icon ion-arrow-left-c" ng-click="goBack()"></button>
+  <h1 class="title">Electronic Brainwriting</h1>
+</div>
+
+<ion-view title="Group settings Participant">
+    <ion-content padding="true" class="has-header">
+        <form id="groupSettingsParticipant-form3" class="list">
+            <label class="item item-input" id="groupSettingsParticipant-input7">
+                <span class="input-label">Name</span> {{group.titulo}}
+
+            </label>
+            <label class="item item-input" id="groupSettingsParticipant-input6">
+                <span class="input-label">Description</span> {{group.descricao}}
+
+            </label>
+            <div class="item item-body" id="groupSettingsParticipant-list-item-container8">
+                <div id="groupSettingsParticipant-markdown5" style="margin-top:0px;color:#000000;">
+                    <p>Participants</p>
+                </div>
+            </div>
+            <a ui-sref="table" id="groupSettingsParticipant-button5" class="button button-positive  button-block icon-left ion-android-people">Participate</a>
+        </form>
+        <a ui-sref="tabsController.openTabDefaultPage" id="groupSettingsParticipant-button6" class="button button-positive  button-block icon-left ion-android-cancel">Leave</a>
+    </ion-content>
+</ion-view>

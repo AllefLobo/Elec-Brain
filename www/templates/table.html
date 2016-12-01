@@ -1,0 +1,53 @@
+<div class="bar bar-header">
+  <button class="button icon ion-arrow-left-c" ng-click="goBack()"></button>
+  <h1 class="title">Electronic Brainwriting</h1>
+	<button class="button button-clear button-positive" ng-click="modal.show()">New</button>
+</div>
+
+<ion-view title="Table">
+    <ion-content padding="true" class="has-header">
+        <div class="item item-body" id="table-list-item-container9" ng-repeat="idea in ideas" >
+						<h3>Autor: {{idea.autor.nome}}</h3>
+            <ion-list id="table-list6" ui-sref="table({groupId : group.id })">
+                <ion-item id="" >{{idea.texto}}</ion-item>
+            </ion-list>
+            <button id="table-button10" class="button button-positive  button-block icon-left ion-android-add" ng-click="comment.show()">increase</button>
+        </div>
+    </ion-content>
+</ion-view>
+
+<script id="templates/newIdea.html" type="text/ng-template">
+      <ion-modal-view>
+        <ion-header-bar class="bar bar-header bar-positive">
+          <h1 class="title">New idea</h1>
+          <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+        </ion-header-bar>
+        <ion-content class="padding">
+          <div class="list">
+            <label class="item item-input">
+              <span class="input-label">New idea</span>
+              <input ng-model="idea" type="text" placeholder="Create">
+            </label>
+            <button class="button button-full button-positive" ng-click="add(idea)">Create</button>
+          </div>
+        </ion-content>
+      </ion-modal-view>
+</script>
+
+<script id="templates/newComment.html" type="text/ng-template">
+      <ion-modal-view>
+        <ion-header-bar class="bar bar-header bar-positive">
+          <h1 class="title">New increment</h1>
+          <button class="button button-clear button-primary" ng-click="comment.hide()">Cancel</button>
+        </ion-header-bar>
+        <ion-content class="padding">
+          <div class="list">
+            <label class="item item-input">
+              <span class="input-label">Your increment</span>
+              <input ng-model="increment" type="text">
+            </label>
+            <button class="button button-full button-positive" ng-click="increase(increment)">increase</button>
+          </div>
+        </ion-content>
+      </ion-modal-view>
+</script>

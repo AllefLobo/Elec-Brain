@@ -1,0 +1,25 @@
+
+<div class="bar bar-header">
+  <h1 class="title">Electronic Brainwriting</h1>
+</div>
+
+<ion-view title="login" >
+    <ion-content padding="true" class="has-header">
+        <form id="login-form1" class="list">
+            <ion-list id="login-list1">
+                <label class="item item-input" id="login-input1">
+                    <span class="input-label">Username</span>
+                    <input type="text" placeholder="Username" ng-model="data.username" value="asdas">
+                </label>
+                <label class="item item-input" id="login-input2">
+                    <span class="input-label">Password</span>
+                    <input type="password" placeholder="Password" ng-model="data.password">
+                </label>
+            </ion-list>
+            <div class="spacer" style="height: 40px;"></div>
+						<!-- ng-click="login()" -->
+            <a id="login-button1" class="button button-stable  button-block" ng-click="login(data)" >Log in</a>
+            <a ui-sref="signup" id="login-button2" class="button button-positive  button-block button-clear">Or create an account</a>
+        </form>
+    </ion-content>
+</ion-view>

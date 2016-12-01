@@ -1,0 +1,26 @@
+
+<div class="bar bar-header">
+  <button menu-toggle="left" class="button icon ion-navicon"></button>
+  <h1 class="title">Electronic Brainwriting</h1>
+</div>
+
+<ion-view title="Create group">
+    <ion-content padding="true" class="has-header">
+        <form novalidate class="list">
+            <label class="item item-input" id="createGroup-input12">
+                <span class="input-label">Name</span>
+                <input type="text" placeholder="Name of the group" ng-model="params.title">
+            </label>
+            <label class="item item-input" id="createGroup-textarea1">
+                <span class="input-label">Description</span><textarea placeholder="Description" ng-model="params.description"></textarea>
+            </label>
+            <label class="item item-input" id="createGroup-textarea2">
+                <span class="input-label">Topic</span><textarea placeholder="Topic to be discuss" ng-model="params.topic"></textarea>
+            </label>
+        </form>
+        <div id="createGroup-button-bar2" class="button-bar">
+						<input type="submit" class="button button-positive  button-block icon ion-plus" name="name" ng-click="create(params)">
+            <a ui-sref="tabsController.openTabDefaultPage" id="createGroup-button13" class="button button-positive  button-block icon ion-android-cancel"></a>
+        </div>
+    </ion-content>
+</ion-view>
