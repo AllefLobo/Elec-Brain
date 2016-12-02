@@ -7,15 +7,15 @@
     <ion-content padding="true" class="has-header">
         <form id="groupSettingsFacilitator-form11" class="list">
             <label class="item item-input" id="groupSettingsFacilitator-input9">
-                <span class="input-label">Name</span>
+                <span class="input-label">Título</span>
                 <input type="text" placeholder="" ng-model="group.titulo" value="{{group.titulo}}">
             </label>
             <label class="item item-input" id="groupSettingsFacilitator-input10">
-                <span class="input-label">Description</span>
+                <span class="input-label">Descrição</span>
                 <input type="text" placeholder="" ng-model="group.descricao" value="{{group.descricao}}">
             </label>
             <label class="item item-input" id="groupSettingsFacilitator-input11">
-                <span class="input-label">Topic</span>
+                <span class="input-label">Gatilho</span>
                 <input type="text" placeholder="" ng-model="group.gatilho" value="{{group.gatilho}}">
             </label>
 
@@ -34,13 +34,13 @@
 						</div>
 
 						<div class="button-bar">
-							<button  class="button button-balanced  button-block icon ion-plus" ng-click="newParticipant.show()">Add participant</button>
+							<button  class="button button-balanced  button-block icon ion-plus" ng-click="newParticipant.show()">Adicionar participar</button>
 						</div>
 
 
 						<div id="groupSettingsFacilitator-button-bar4" class="button-bar">
-		            <button id="groupSettingsFacilitator-button8" class="button button-positive  button-block icon ion-edit" ng-click="save(group)">Save</button>
-		            <button ui-sref="table({groupId : group.id })" class="button button-positive  button-block icon ion-android-open">View Table</button>
+		            <button id="groupSettingsFacilitator-button8" class="button button-positive  button-block icon ion-edit" ng-click="save(group)">Salvar</button>
+		            <button ui-sref="table({groupId : group.id })" class="button button-positive  button-block icon ion-android-open">Ver mesa</button>
 		        </div>
         </form>
 
@@ -51,16 +51,16 @@
 <script id="templates/addParticipant.html" type="text/ng-template">
       <ion-modal-view>
         <ion-header-bar class="bar bar-header bar-balanced">
-          <h1 class="title">Adding participant</h1>
-          <button class="button button-clear button-primary" ng-click="newParticipant.hide()">Cancel</button>
+          <h1 class="title">Adicioanr participante</h1>
+          <button class="button button-clear button-primary" ng-click="newParticipant.hide()">Cancelar</button>
         </ion-header-bar>
         <ion-content class="padding">
           <div class="list">
             <label class="item item-input">
-              <span class="input-label">New Participant </span>
+              <span class="input-label">Novo participante</span>
               <input ng-model="participant" type="text">
             </label>
-            <button class="button button-full button-positive" ng-click="add(participant, group.id)">Add</button>
+            <button class="button button-full button-positive" ng-click="add(participant, group.id)">Adicionar</button>
           </div>
         </ion-content>
       </ion-modal-view>
