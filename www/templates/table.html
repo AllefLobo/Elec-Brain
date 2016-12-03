@@ -1,71 +1,18 @@
 <div class="bar bar-header">
   <button class="button icon ion-arrow-left-c" ng-click="goBack()"></button>
-  <h1 class="title">Electronic Brainwriting</h1>
-	<button class="button button-clear button-positive" ng-click="modal.show()">New</button>
+  <h1 class="title">Brainwriting Eletrônico</h1>
+	<button class="button button-clear button-positive" ng-click="modal.show()">Nova</button>
 </div>
 
 <ion-view title="Table">
     <ion-content padding="true" class="has-header">
-        <div class="item item-body" id="table-list-item-container9" ng-repeat="idea in ideas" >
-						<h3>Autor: {{idea.autor.nome}}</h3>
-            <ion-list id="table-list6" ui-sref="table({groupId : group.id })">
-                <ion-item id="" >{{idea.texto}}</ion-item>
+        <div class="item item-body" ng-repeat="ideia in ideias" >
+						<h3>Autor: {{ideia.autor.nome}}</h3>
+            <ion-list id="table-list6" >
+                <ion-item id="" >{{ideia.texto}}</ion-item>
+								<button class="button button-positive  button-block icon-left ion-android-search" ui-sref="comentarios({ideiaId: ideia.id})">Ver comentários</button>
             </ion-list>
-						<button class="button button-positive  button-block icon-left ion-android-search" ng-click="getComments.show()">see increments</button>
-            <button class="button button-positive  button-block icon-left ion-android-add" ng-click="newComment.show()">increase</button>
+            <!-- <button class="button button-positive  button-block icon-left ion-android-add" ng-click="newComment.show()">Comentar</button> -->
         </div>
     </ion-content>
 </ion-view>
-
-<script id="templates/newIdea.html" type="text/ng-template">
-      <ion-modal-view>
-        <ion-header-bar class="bar bar-header bar-positive">
-          <h1 class="title">Nova ideia</h1>
-          <button class="button button-clear button-primary" ng-click="modal.hide()">Cancelar</button>
-        </ion-header-bar>
-        <ion-content class="padding">
-          <div class="list">
-            <label class="item item-input">
-              <span class="input-label">Nova ideia</span>
-              <input ng-model="idea" type="text" placeholder="Create">
-            </label>
-            <button class="button button-full button-positive" ng-click="add(idea)">Criar</button>
-          </div>
-        </ion-content>
-      </ion-modal-view>
-</script>
-
-<script id="templates/newComment.html" type="text/ng-template">
-      <ion-modal-view>
-        <ion-header-bar class="bar bar-header bar-positive">
-          <h1 class="title">Novo comentário</h1>
-          <button class="button button-clear button-primary" ng-click="newComment.hide()">Cancelar</button>
-        </ion-header-bar>
-        <ion-content class="padding">
-          <div class="list">
-            <label class="item item-input">
-              <span class="input-label">Seu comentário</span>
-              <input ng-model="increment" type="text">
-            </label>
-            <button class="button button-full button-positive" ng-click="increase(increment)">comentar</button>
-          </div>
-        </ion-content>
-      </ion-modal-view>
-</script>
-
-<script id="templates/getComments.html" type="text/ng-template">
-      <ion-modal-view>
-        <ion-header-bar class="bar bar-header bar-positive">
-          <h1 class="title">Novo comentário</h1>
-          <button class="button button-clear button-primary" ng-click="getComments.hide()">Cancelar</button>
-        </ion-header-bar>
-
-        <ion-content class="padding">
-					<ul class="list">
-				    <li class="item" ng-repeat="comment in comments">
-				    	{{comment.texto}}
-				    </li>
-					</ul>
-        </ion-content>
-      </ion-modal-view>
-</script>

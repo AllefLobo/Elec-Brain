@@ -26,6 +26,27 @@ angular.module("services",[])
 
 }])
 
+.factory('addPessoaService', ['$http', function($http){
+	return {
+		postPessoa: function( nome){
+			var data = {
+			  "email": nome,
+			  "nome": nome,
+			  "senha": "padrao"
+			};
+
+		return $http({
+								method: 'POST',
+								url: 'http://localhost:8080/CreativeAPI/pessoas',
+								data: data,
+								headers: { 'Content-Type': "application/json;charset=UTF-8" }
+						})
+		}
+	};
+
+}])
+
+
 //----------------------------------------------------------------------------
 
 	.factory('getGroupsService', ['$http', function($http){
@@ -141,9 +162,9 @@ angular.module("services",[])
 		};
 	}])
 
-	.factory('addIncrementService', ['$http', function($http){
+	.factory('addCommentService', ['$http', function($http){
 		return {
-			postIdea: function(autorId, groupId, texto){
+			postComment: function(autorId, ideiaId, texto){
 				var data = {
 					"autor":{
 						"id": autorId
@@ -174,10 +195,18 @@ angular.module("services",[])
 
 			return $http({
 									method: 'POST',
-									url: 'http://localhost:8080/CreativeAPI/brainwriting/ideia/'+ groupId +'/comentario',
+									url: 'http://localhost:8080/CreativeAPI/brainwriting/ideia/'+ideiaId+'/comentario',
 									data: data,
 									headers: { 'Content-Type': "application/json;charset=UTF-8" }
 							})
+			}
+		};
+	}])
+
+	.factory('getCommentsService', ['$http', function($http){
+		return {
+			getComments: function(id){
+				return  $http.get('http://localhost:8080/CreativeAPI/brainwriting/ideia/'+ id);
 			}
 		};
 	}])

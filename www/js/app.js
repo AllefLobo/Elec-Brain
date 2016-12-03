@@ -36,7 +36,8 @@ angular.module('starter', ['ionic', 'controllers', 'services'])
 
 		.state("signup",{
       url: "/signup",
-      templateUrl:  "templates/signup.html"
+      templateUrl:  "templates/signup.html",
+			controller:'signupController'
     })
 
 		.state("createGroup",{
@@ -61,6 +62,12 @@ angular.module('starter', ['ionic', 'controllers', 'services'])
       url: "/table/:groupId",
       templateUrl:  "templates/table.html",
 			controller:'TableController'
+    })
+
+		.state("comentarios",{
+      url: "/comentarios/:ideiaId",
+      templateUrl:  "templates/getComments.html",
+			controller:'CommentsController'
     })
 
     //tabs

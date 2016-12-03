@@ -25,10 +25,10 @@
 						      Status
 						    </div>
 						    <select ng-model="group.fase" value="{{group.fase}}">
-						      <option value="NOVA">Open</option>
-						      <option value="RECEBENDO_IDEIAS">Think</option>
-						      <option value="AVALIANDO_IDEIAS">Evaluate</option>
-									<option value="ENCERRADA">Rank</option>
+						      <option value="NOVA">NOVA</option>
+						      <option value="RECEBENDO_IDEIAS">RECEBENDO_IDEIAS</option>
+						      <option value="AVALIANDO_IDEIAS">AVALIANDO_IDEIAS</option>
+									<option value="ENCERRADA">ENCERRADA</option>
 						    </select>
 						  </label>
 						</div>
@@ -39,8 +39,7 @@
 
 
 						<div id="groupSettingsFacilitator-button-bar4" class="button-bar">
-		            <button id="groupSettingsFacilitator-button8" class="button button-positive  button-block icon ion-edit" ng-click="save(group)">Salvar</button>
-		            <button ui-sref="table({groupId : group.id })" class="button button-positive  button-block icon ion-android-open">Ver mesa</button>
+		            <button id="groupSettingsFacilitator-button8" class="button button-positive  button-block icon ion-edit" ng-click="save(group)">Salvar</button>		            
 		        </div>
         </form>
 

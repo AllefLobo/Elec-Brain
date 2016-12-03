@@ -1,13 +1,28 @@
 angular.module("controllers",[])
 
+	.controller('signupController', ['$scope', '$state', 'addPessoaService', function($scope, $state, addPessoaService){
+		$scope.cadastrar = function(nome){
+			addPessoaService.postPessoa(nome).then(function(response){
+				console.log(response);
+				$state.go('tab.openTab');
+			}), function error(response){
+				console.log(response);
+				$state.go('signup');
+			};
+		};
+	}])
+
 	.controller('LoginController',['$scope', '$state', 'getUniquePersonService', function($scope, $state, getUniquePersonService){
-		$scope.login = function(data){
+		$scope.login = function(nome){
 			//getUniquePersonService
-			getUniquePersonService.getPerson(data.username).then(function(response){
+			getUniquePersonService.getPerson(nome).then(function(response){
 				console.log(response.data);
 				window.localStorage.setItem('usuario', JSON.stringify(response.data));
 				$state.go('tab.openTab');
-			})
+			}), function error(response){
+				console.log(response);
+				$state.go('login');
+			};
 		};
 	}])
 
@@ -120,46 +135,87 @@ angular.module("controllers",[])
 //----------------------------------------------------------------------------
 //table
 
-	.controller('TableController', ['$scope', '$stateParams', '$ionicHistory', 'getIdeasService', '$ionicModal', 'addIdeaService', function($scope, $stateParams, $ionicHistory, getIdeasService, $ionicModal, addIdeaService){
+	.controller('TableController', ['$scope', '$stateParams', '$ionicHistory', 'getIdeasService', function($scope, $stateParams, $ionicHistory, getIdeasService){
 		$scope.goBack = function() {
 			$ionicHistory.goBack();
 		};
 
-		console.log($stateParams.groupId);
-
 		getIdeasService.getIdeas($stateParams.groupId).then(function(response){
-			$scope.ideas = response.data;
+			$scope.ideias = response.data;
 			console.log(response.data);
 		});
 
-		$scope.add = function(idea){
-			var usuario = JSON.parse(window.localStorage.getItem('usuario'));
-			var autor = {
-				"email": usuario['email'],
-				"id": usuario['id'],
-				"nome": usuario['nome']
-			};
-			addIdeaService.postIdea(autor, $stateParams.groupId, idea, idea).then(function(response){
-				console.log(response);
-				$scope.modal.remove();
-			});
+		// $scope.add = function(idea){
+		// 	var usuario = JSON.parse(window.localStorage.getItem('usuario'));
+		// 	var autor = {
+		// 		"email": usuario['email'],
+		// 		"id": usuario['id'],
+		// 		"nome": usuario['nome']
+		// 	};
+		// 	addIdeaService.postIdea(autor, $stateParams.groupId, idea, idea).then(function(response){
+		// 		console.log(response);
+		// 		$scope.modal.remove();
+		// 	});
+		// };
+
+		// $scope.comentar = function(comentario){
+		// 	var usuario = JSON.parse(window.localStorage.getItem('usuario'));
+		// 	addIncrementService.postComment(usuario['id'], ideiaId, texto).then(function(response){
+		// 		console.log(response);
+		// 		$scope.modal.remove();
+		// 	});
+		// };
+
+
+
+	  // $ionicModal.fromTemplateUrl('templates/newIdea.html', {
+	  //   scope: $scope,
+		// 	animation: 'slide-in-up'
+	  // }).then(function(modal) {
+	  //   $scope.modal = modal;
+  	// });
+
+		// $ionicModal.fromTemplateUrl('templates/newComment.html', {
+	  //   scope: $scope,
+		// 	animation: 'slide-in-up'
+	  // }).then(function(newComment) {
+	  //   $scope.newComment = newComment;
+  	// });
+
+		// $ionicModal.fromTemplateUrl('templates/getComments.html', {
+	  //   scope: $scope,
+		// 	animation: 'slide-in-up'
+	  // }).then(function(getComments) {
+	  //   $scope.getComments = getComments;
+		//
+		// 	getCommentsService.getComments(34).then(function(response){
+		// 		$scope.comments = response.data.comentarios;
+		// 		console.log(response.data.comentarios);
+		// 	});
+		//
+  	// });
+
+	}])
+
+	.controller('CommentsController', ['$scope', '$stateParams', '$ionicHistory', 'getCommentsService', 'addCommentService', function($scope, $stateParams, $ionicHistory, getCommentsService, addCommentService){
+
+		$scope.goBack = function() {
+			$ionicHistory.goBack();
 		};
 
+		getCommentsService.getComments($stateParams.ideiaId).then(function(response){
+			console.log(response.data.comentarios);
+			$scope.comentarios = response.data.comentarios;
+		});
 
+		$scope.comentar = function(texto){
+			var usuario = JSON.parse(window.localStorage.getItem('usuario'));
 
-	  $ionicModal.fromTemplateUrl('templates/newIdea.html', {
-	    scope: $scope,
-			animation: 'slide-in-up'
-	  }).then(function(modal) {
-	    $scope.modal = modal;
-  	});
+			addCommentService.postComment( usuario['id'], $stateParams.ideiaId, texto).then(function(response){
+				console.log('deu certo');
+			});
+		}
 
-		$ionicModal.fromTemplateUrl('templates/newComment.html', {
-	    scope: $scope,
-			animation: 'slide-in-up'
-	  }).then(function(newComment) {
-	    $scope.newComment = newComment;
-  	});
 
 	}])
 

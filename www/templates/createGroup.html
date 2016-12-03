@@ -9,17 +9,17 @@
         <form novalidate class="list">
             <label class="item item-input" id="createGroup-input12">
                 <span class="input-label">Nome</span>
-                <input type="text" placeholder="Name of the group" ng-model="params.title">
+                <input type="text" placeholder="Nome do grupo de discussão" ng-model="params.title">
             </label>
             <label class="item item-input" id="createGroup-textarea1">
-                <span class="input-label">Descrição</span><textarea placeholder="Description" ng-model="params.description"></textarea>
+                <span class="input-label">Descrição</span><textarea placeholder="Descrição sobre o grupo de discussão" ng-model="params.description"></textarea>
             </label>
             <label class="item item-input" id="createGroup-textarea2">
-                <span class="input-label">Gatilho</span><textarea placeholder="Topic to be discuss" ng-model="params.topic"></textarea>
+                <span class="input-label">Gatilho</span><textarea placeholder="Gatilho de discussão" ng-model="params.topic"></textarea>
             </label>
         </form>
         <div id="createGroup-button-bar2" class="button-bar">
-						<input type="submit" class="button button-positive  button-block icon ion-plus" name="name" ng-click="create(params)">
+						<a href="#" class="button button-positive  button-block icon ion-plus" name="name" ng-click="create(params)"></a>
             <a ui-sref="tabsController.openTabDefaultPage" id="createGroup-button13" class="button button-positive  button-block icon ion-android-cancel"></a>
         </div>
     </ion-content>

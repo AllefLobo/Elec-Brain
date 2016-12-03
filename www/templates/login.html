@@ -1,6 +1,6 @@
 
 <div class="bar bar-header">
-  <h1 class="title">Electronic Brainwriting</h1>
+  <h1 class="title">Brainwriting Electrônico</h1>
 </div>
 
 <ion-view title="login" >
@@ -9,17 +9,17 @@
             <ion-list id="login-list1">
                 <label class="item item-input" id="login-input1">
                     <span class="input-label">Usuario</span>
-                    <input type="text" placeholder="Username" ng-model="data.username" value="asdas">
+                    <input type="text" placeholder="Usuário" ng-model="nome" value="asdas">
                 </label>
-                <label class="item item-input" id="login-input2">
+                <!-- <label class="item item-input" id="login-input2">
                     <span class="input-label">Senha</span>
-                    <input type="password" placeholder="Password" ng-model="data.password">
-                </label>
+                    <input type="password" placeholder="Senha" ng-model="data.password">
+                </label> -->
             </ion-list>
             <div class="spacer" style="height: 40px;"></div>
 						<!-- ng-click="login()" -->
-            <a id="login-button1" class="button button-stable  button-block" ng-click="login(data)" >Log in</a>
-            <a ui-sref="signup" id="login-button2" class="button button-positive  button-block button-clear">Or create an account</a>
+            <a id="login-button1" class="button button-stable  button-block" ng-click="login(nome)" >Entrar</a>
+            <a ui-sref="signup" id="login-button2" class="button button-positive  button-block button-clear">Ou cria uma conta</a>
         </form>
     </ion-content>
 </ion-view>

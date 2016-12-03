@@ -1,0 +1,29 @@
+<ion-header-bar class="bar bar-header bar-positive">
+	<button class="button icon ion-arrow-left-c" ng-click="goBack()"></button>
+	<h1 class="title">Comentários</h1>
+	<!-- <button class="button button-clear button-primary" >Cancelar</button> -->
+</ion-header-bar>
+
+<ion-content class="padding">
+	<label class="item item-input" id="login-input1">
+			<span class="input-label">Novo comentario</span>
+			<input type="text" placeholder="comentario" ng-model="comentario">
+	</label>
+	<button class="button button-positive  button-block icon-left ion-android-add" ng-click='comentar(comentario)'>Comentar</button>
+
+	<!-- <ul class="list">
+		<li class="item" ng-repeat="comentario in comentarios">
+			 {{comentario.texto}}<br>
+			<b><i></i></b>
+		</li>
+	</ul> -->
+
+	<div class="item item-body" ng-repeat="comentario in comentarios" >
+		<ion-list>
+			{{comentario.texto}}<br>
+		<b><i>{{comentario.autor.nome}}</i></b>
+		</ion-list>
+	</div>
+
+
+</ion-content>

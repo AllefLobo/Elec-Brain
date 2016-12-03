@@ -3,11 +3,14 @@
         <div class="list card">
           <ion-list>
             <ion-spinner class="spinner" ng-show="loading" ></ion-spinner>
-            <ion-item class="item-avatar item-icon-right"
+            <ion-item class="item-icon-right"
               ng-repeat="item in groups">
-                <h2>Dsicussão: {{item.titulo}}</h2>
+							<div class=""  ui-sref="table({groupId : item.id })">
+								<h2>Discussão: {{item.titulo}}</h2>
                 <p>Descrição: {{item.descricao}}</p>
-                <a class="icon ion-ios-settings-strong" ui-sref="facilitatorGroupSettings({id: item.id})" ></a>
+							</div>
+								<!-- <a ui-sref="table({groupId : item.id })" class="icon ion-ios-settings-strong"></a> -->
+                <a class="icon ion-edit" ui-sref="facilitatorGroupSettings({id: item.id})" ></a>
             </ion-item>
           </ion-list>
         </div>
