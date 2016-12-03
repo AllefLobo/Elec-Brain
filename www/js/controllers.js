@@ -101,12 +101,12 @@ angular.module("controllers",[])
 
 		getUniqueGroupService.getGroup($stateParams.id).then(function(response){
 			$scope.group = response.data;
+			$scope.participantes = response.data.participantes;
 			console.log(response.data);
 		});
 
 		$scope.save = function(group){
 			var usuario = JSON.parse(window.localStorage.getItem('usuario'));
-			//group['fase'] = "RECEBENDO_IDEIAS";
 			group['facilitador'] = {'id': usuario['id'] };
 			console.log(group);
 
@@ -115,7 +115,6 @@ angular.module("controllers",[])
 				$state.go('tab.openTab');
 			});
 		};
-
 
 		$scope.add = function(participant, groupId){
 			addParticipantService.postParticipant(participant, groupId).then(function(response){
@@ -142,58 +141,9 @@ angular.module("controllers",[])
 
 		getIdeasService.getIdeas($stateParams.groupId).then(function(response){
 			$scope.ideias = response.data;
+			$scope.groupId = $stateParams.groupId;
 			console.log(response.data);
 		});
-
-		// $scope.add = function(idea){
-		// 	var usuario = JSON.parse(window.localStorage.getItem('usuario'));
-		// 	var autor = {
-		// 		"email": usuario['email'],
-		// 		"id": usuario['id'],
-		// 		"nome": usuario['nome']
-		// 	};
-		// 	addIdeaService.postIdea(autor, $stateParams.groupId, idea, idea).then(function(response){
-		// 		console.log(response);
-		// 		$scope.modal.remove();
-		// 	});
-		// };
-
-		// $scope.comentar = function(comentario){
-		// 	var usuario = JSON.parse(window.localStorage.getItem('usuario'));
-		// 	addIncrementService.postComment(usuario['id'], ideiaId, texto).then(function(response){
-		// 		console.log(response);
-		// 		$scope.modal.remove();
-		// 	});
-		// };
-
-
-
-	  // $ionicModal.fromTemplateUrl('templates/newIdea.html', {
-	  //   scope: $scope,
-		// 	animation: 'slide-in-up'
-	  // }).then(function(modal) {
-	  //   $scope.modal = modal;
-  	// });
-
-		// $ionicModal.fromTemplateUrl('templates/newComment.html', {
-	  //   scope: $scope,
-		// 	animation: 'slide-in-up'
-	  // }).then(function(newComment) {
-	  //   $scope.newComment = newComment;
-  	// });
-
-		// $ionicModal.fromTemplateUrl('templates/getComments.html', {
-	  //   scope: $scope,
-		// 	animation: 'slide-in-up'
-	  // }).then(function(getComments) {
-	  //   $scope.getComments = getComments;
-		//
-		// 	getCommentsService.getComments(34).then(function(response){
-		// 		$scope.comments = response.data.comentarios;
-		// 		console.log(response.data.comentarios);
-		// 	});
-		//
-  	// });
 
 	}])
 
@@ -217,6 +167,26 @@ angular.module("controllers",[])
 		}
 
 
+	}])
+
+
+	.controller('NovaIdeiaController', ['$scope', '$state', '$stateParams', '$ionicHistory', 'addIdeaService', function($scope, $state, $stateParams, $ionicHistory, addIdeaService){
+		$scope.goBack = function() {
+			$ionicHistory.goBack();
+		};
+
+		$scope.enviar = function(ideia){
+			var usuario = JSON.parse(window.localStorage.getItem('usuario'));
+			var autor = {
+				"email": usuario['email'],
+				"id": usuario['id'],
+				"nome": usuario['nome']
+			};
+			addIdeaService.postIdea(autor, $stateParams.groupId, ideia).then(function(response){
+				console.log(response);
+				console.log('go back aki');
+			});
+		}
 	}])
 
 	;

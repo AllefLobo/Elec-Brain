@@ -122,7 +122,7 @@ angular.module("services",[])
 
 	.factory('addIdeaService', ['$http', function($http){
 		return {
-			postIdea: function(autor, group, texto, titulo){
+			postIdea: function(autor, group, texto){
 				var data = {
 				"autor": autor,
 				"data": {
@@ -149,7 +149,7 @@ angular.module("services",[])
 				"numeroAvaliacoes": 0,
 				"numeroComentarios": 0,
 				"texto": texto,
-				"titulo": titulo
+				"titulo": texto
 				};
 
 			return $http({

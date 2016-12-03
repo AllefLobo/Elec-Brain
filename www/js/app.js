@@ -70,6 +70,12 @@ angular.module('starter', ['ionic', 'controllers', 'services'])
 			controller:'CommentsController'
     })
 
+		.state("novaIdeia",{
+      url: "/novaIdeia/:groupId",
+      templateUrl:  "templates/novaIdeia.html",
+			controller:'NovaIdeiaController'
+    })
+
     //tabs
     .state("tab",{
       url: "/tab",

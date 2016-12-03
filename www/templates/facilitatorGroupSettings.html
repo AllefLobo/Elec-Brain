@@ -5,6 +5,7 @@
 
 <ion-view title="Group Settings Participant">
     <ion-content padding="true" class="has-header">
+			<h3>Configurações de grupo</h3>
         <form id="groupSettingsFacilitator-form11" class="list">
             <label class="item item-input" id="groupSettingsFacilitator-input9">
                 <span class="input-label">Título</span>
@@ -33,13 +34,19 @@
 						  </label>
 						</div>
 
-						<div class="button-bar">
-							<button  class="button button-balanced  button-block icon ion-plus" ng-click="newParticipant.show()">Adicionar participar</button>
+						<h3>Participantes</h3>
+						<div class="item item-body" ng-repeat="participante in participantes" >
+							<ion-list>
+							<b><i>{{participante.nome}}</i></b>
+							</ion-list>
 						</div>
 
+						<div class="button-bar">
+							<button  class="button button-balanced  button-block icon ion-plus" ng-click="newParticipant.show()">Adicionar participante</button>
+						</div>
 
 						<div id="groupSettingsFacilitator-button-bar4" class="button-bar">
-		            <button id="groupSettingsFacilitator-button8" class="button button-positive  button-block icon ion-edit" ng-click="save(group)">Salvar</button>		            
+		            <button id="groupSettingsFacilitator-button8" class="button button-positive  button-block icon ion-edit" ng-click="save(group)">Salvar</button>
 		        </div>
         </form>
 
@@ -50,7 +57,7 @@
 <script id="templates/addParticipant.html" type="text/ng-template">
       <ion-modal-view>
         <ion-header-bar class="bar bar-header bar-balanced">
-          <h1 class="title">Adicioanr participante</h1>
+          <h1 class="title">Adicionar participante</h1>
           <button class="button button-clear button-primary" ng-click="newParticipant.hide()">Cancelar</button>
         </ion-header-bar>
         <ion-content class="padding">

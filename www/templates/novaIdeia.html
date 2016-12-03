@@ -1,0 +1,14 @@
+<ion-header-bar class="bar bar-header bar-positive">
+	<button class="button icon ion-arrow-left-c" ng-click="goBack()"></button>
+	<h1 class="title">Nova ideia</h1>
+	<!-- <button class="button button-clear button-primary" >Cancelar</button> -->
+</ion-header-bar>
+
+<ion-content class="padding">
+	<label class="item item-input" id="login-input1">
+			<span class="input-label">Nova </span>
+			<input type="text" placeholder="ideia" ng-model="ideia">
+	</label>
+	<button class="button button-positive  button-block icon-left ion-android-add" ng-click='enviar(ideia)'>enviar</button>
+
+</ion-content>
