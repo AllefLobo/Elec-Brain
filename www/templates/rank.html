@@ -1,26 +1,17 @@
+<div class="bar bar-header">
+  <button class="button icon ion-arrow-left-c" ng-click="goBack()"></button>
+  <h1 class="title">Rank de ideias</h1>
+</div>
+
 <ion-view title="Rank">
     <ion-content padding="true" class="has-header">
         <div class="item item-body" id="rank-list-item-container17">
             <div id="rank-markdown13" style="margin-top:0px;color:#000000;">
-                <p>
-                    <strong>Melhores Ideas</strong>
-                </p>
             </div>
-            <ion-list id="rank-list9">
-                <ion-item class="item-icon-right" id="rank-list-item23">Item
-                    <i class="icon ion-android-star"></i>
-                </ion-item>
-                <ion-item class="item-icon-right" id="rank-list-item24">Item
-                    <i class="icon ion-android-star-half"></i>
-                </ion-item>
-                <ion-item class="item-icon-right" id="rank-list-item28">Item
-                    <i class="icon ion-android-star-half"></i>
-                </ion-item>
-                <ion-item class="item-icon-right" id="rank-list-item29">Item
-                    <i class="icon ion-android-star-half"></i>
-                </ion-item>
-                <ion-item class="item-icon-right" id="rank-list-item30">Item
-                    <i class="icon ion-android-star-half"></i>
+
+            <ion-list class="item-icon-right" ng-repeat="ideia in ideias | orderBy: '-numeroAvaliacoes'">
+                <ion-item  class="item-icon-right" id="rank-list-item24">{{ideia.texto}}
+									<i class="icon ion-ribbon-a"></i>
                 </ion-item>
             </ion-list>
         </div>

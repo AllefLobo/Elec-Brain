@@ -1,5 +1,10 @@
 <ion-view title="Think Tab">
     <ion-content padding="true" class="has-header">
+			<ion-refresher pulling-text="Puxe para atualizar" on-refresh="doRefresh()">
+		 </ion-refresher>
+		 <div ng-show="teste" class="ng-hide">
+			 <h3>Não há grupos de discussão</h3>
+		 </div>
 			<div class="list card">
 				<ion-list>
 					<ion-spinner class="spinner" ng-show="loading" ></ion-spinner>
@@ -10,7 +15,7 @@
 							<p>Descrição: {{item.descricao}}</p>
 						</div>
 							<!-- <a ui-sref="table({groupId : item.id })" class="icon ion-ios-settings-strong"></a> -->
-							<a class="icon ion-edit" ui-sref="facilitatorGroupSettings({id: item.id})" ></a>
+							<a class="icon ion-edit" ng-show="usuario.nome == item.facilitador.nome" ui-sref="facilitatorGroupSettings({id: item.id})" ></a>
 					</ion-item>
 				</ion-list>
 			</div>

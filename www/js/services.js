@@ -8,6 +8,14 @@ angular.module("services",[])
 	};
 }])
 
+.factory('getPeopleService', ['$http', function($http){
+	return {
+		getPeople: function(id){
+			return  $http.get('http://localhost:8080/CreativeAPI/pessoas');
+		}
+	};
+}])
+
 .factory('addParticipantService', ['$http', function($http){
 	return {
 		postParticipant: function( participantId, groupId){
@@ -46,6 +54,27 @@ angular.module("services",[])
 
 }])
 
+.factory('updatePessoaService', ['$http', function($http){
+	return {
+		postPessoa: function( nome, id){
+			var data = {
+			  "email": nome,
+			  "nome": nome,
+			  "senha": "padrao"
+			};
+
+		return $http({
+								method: 'POST',
+								url: 'http://localhost:8080/CreativeAPI/pessoas/' + id,
+								data: data,
+								headers: { 'Content-Type': "application/json;charset=UTF-8" }
+						})
+		}
+	};
+
+}])
+
+
 
 //----------------------------------------------------------------------------
 
@@ -67,11 +96,16 @@ angular.module("services",[])
 
 	.factory('updateUniqueGroupService', ['$http', function($http){
 		return {
-    	setGroup: function(group){
+    	setGroup: function(grupo){
 			return $http({
 			            method: 'POST',
-			            url: 'http://localhost:8080/CreativeAPI/brainwriting/'+ group['id'],
-			            data: group,
+			            url: 'http://localhost:8080/CreativeAPI/brainwriting/'+ grupo['id'],
+			            data: {
+									  "titulo": grupo['titulo'],
+									  "gatilho": grupo['gatilho'],
+									  "descricao": grupo['descricao'],
+									  "fase": grupo['fase']
+									},
 			            headers: { 'Content-Type': "application/json;charset=UTF-8" }
 			        })
     	}
@@ -207,6 +241,26 @@ angular.module("services",[])
 		return {
 			getComments: function(id){
 				return  $http.get('http://localhost:8080/CreativeAPI/brainwriting/ideia/'+ id);
+			}
+		};
+	}])
+
+	.factory('avaliarService', ['$http', function($http){
+		return {
+			postAvaliacao: function(autorId, ideiaId){
+				var data = {
+			    "avaliacao" : 1,
+					 "autor":{
+					 	"id": autorId
+						}
+				};
+
+			return $http({
+									method: 'POST',
+									url: 'http://localhost:8080/CreativeAPI/brainwriting/ideia/'+ideiaId+'/avaliacao',
+									data: data,
+									headers: { 'Content-Type': "application/json;charset=UTF-8" }
+							})
 			}
 		};
 	}])

@@ -1,6 +1,7 @@
 
 <div class="bar bar-header">
-  <h1 class="title">Electronic Brainwriting</h1>
+	<button class="button icon ion-arrow-left-c" ng-click="goBack()"></button>
+  <h1 class="title">Brainwriting Eletrônico</h1>
 </div>
 
 <ion-view title="signup">
@@ -16,7 +17,7 @@
                     <input type="text"ng-model="pessoa.senha" placeholder="">
                 </label> -->
             </ion-list>
-            <a ui-sref="tabsController.openTabDefaultPage" id="signup-button3" class="button button-stable  button-block icon-left ion-log-in" ng-click="cadastrar(nome)">Cadastrar</a>
+            <a  id="signup-button3" class="button button-stable  button-block icon-left ion-log-in" ng-click="cadastrar(nome)">Cadastrar</a>
         </form>
     </ion-content>
 </ion-view>

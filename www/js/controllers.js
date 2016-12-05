@@ -1,10 +1,14 @@
 angular.module("controllers",[])
 
-	.controller('signupController', ['$scope', '$state', 'addPessoaService', function($scope, $state, addPessoaService){
+	.controller('signupController', ['$scope', '$state', 'addPessoaService', '$ionicHistory', function($scope, $state, addPessoaService, $ionicHistory){
+		$scope.goBack = function() {
+			$ionicHistory.goBack();
+		};
+
 		$scope.cadastrar = function(nome){
 			addPessoaService.postPessoa(nome).then(function(response){
 				console.log(response);
-				$state.go('tab.openTab');
+				$state.go('login');
 			}), function error(response){
 				console.log(response);
 				$state.go('signup');
@@ -12,13 +16,28 @@ angular.module("controllers",[])
 		};
 	}])
 
-	.controller('LoginController',['$scope', '$state', 'getUniquePersonService', function($scope, $state, getUniquePersonService){
-		$scope.login = function(nome){
-			//getUniquePersonService
-			getUniquePersonService.getPerson(nome).then(function(response){
-				console.log(response.data);
-				window.localStorage.setItem('usuario', JSON.stringify(response.data));
+	.controller('EditPerfilController', ['$scope', '$state', 'updatePessoaService', function($scope, $state, updatePessoaService){
+		$scope.editar = function(novoNome){
+				var usuario = JSON.parse(window.localStorage.getItem('usuario'));
+			updatePessoaService.postPessoa( novoNome, usuario['id']).then(function(){
+				usuario['nome'] = novoNome;
+				window.localStorage.setItem('usuario', JSON.stringify(usuario));
 				$state.go('tab.openTab');
+			});
+		}
+	}])
+
+	.controller('LoginController',['$scope', '$state', 'getPeopleService', function($scope, $state, getPeopleService){
+		$scope.login = function(nome){
+			getPeopleService.getPeople().then(function(response){
+				for (variable of response.data) {
+					if (variable.nome == nome) {
+						window.localStorage.setItem('usuario', JSON.stringify(variable));
+						$state.go('tab.openTab');
+						return 1;
+					}
+				}
+				$state.go('login');
 			}), function error(response){
 				console.log(response);
 				$state.go('login');
@@ -26,12 +45,16 @@ angular.module("controllers",[])
 		};
 	}])
 
-  .controller('ConfigController',['$scope', function($scope){
-    $scope.nome = "";
+  .controller('ConfigController',['$scope', '$state', function($scope, $state){
+    $scope.logout = function(){
+			window.localStorage.empty();
+			$state.go('login');
+		}
   }])
 
   .controller('OpenTabController',['getGroupsService','$scope', '$state', function TabController (getGroupsService, $scope, $state) {
 		var usuario = JSON.parse(window.localStorage.getItem('usuario'));
+		$scope.usuario = usuario;
 		$scope.$watch(
 			getGroupsService.getGroups(usuario['id']).then(function(response){
 				groups = [];
@@ -43,8 +66,29 @@ angular.module("controllers",[])
 				}
 				console.log(groups);
 				$scope.groups = groups;
+				$scope.teste = !groups.length;
 			})
 		);
+
+		$scope.doRefresh = function() {
+			getGroupsService.getGroups(usuario['id']).then(function(response){
+				groups = [];
+				for (variable of response.data) {
+					if (variable['fase'] == 'NOVA') {
+						groups.push(variable);
+						console.log(variable);
+					}
+				}
+				console.log(groups);
+				$scope.groups = groups;
+				$scope.teste = !groups.length;
+			})
+     .finally(function() {
+       // Stop the ion-refresher from spinning
+       $scope.$broadcast('scroll.refreshComplete');
+     });
+  	};
+
 	}])
 
   .controller('createGroupController', ['$scope', '$state', 'createGroupService', '$stateParams', function($scope, $state, createGroupService, $stateParams){
@@ -70,18 +114,156 @@ angular.module("controllers",[])
 
 	.controller('ThinkTabController', ['$scope', '$state', 'getGroupsService', function($scope, $state, getGroupsService){
 		var usuario = JSON.parse(window.localStorage.getItem('usuario'));
+		$scope.usuario = usuario;
 		$scope.$watch(
 			getGroupsService.getGroups(usuario['id']).then(function(response){
 				groups = [];
 				for (variable of response.data) {
-					if (variable['fase'] == 'RECEBENDO_IDEIAS') {
+					if (variable['fase'] == 'RECEBENDO_IDEIAS' ) {
+						console.log(variable);
 						groups.push(variable);
 					}
 				}
 				console.log(groups);
 				$scope.groups = groups;
+				$scope.teste = !groups.length;
 			})
 		);
+
+		$scope.doRefresh = function() {
+			getGroupsService.getGroups(usuario['id']).then(function(response){
+				groups = [];
+				for (variable of response.data) {
+					if (variable['fase'] == 'RECEBENDO_IDEIAS' ) {
+						groups.push(variable);
+					}
+				}
+				console.log(groups);
+				$scope.groups = groups;
+				$scope.teste = !groups.length;
+			})
+     .finally(function() {
+       // Stop the ion-refresher from spinning
+       $scope.$broadcast('scroll.refreshComplete');
+     });
+  	};
+
+	}])
+
+	.controller('ArguingTabController', ['$scope', '$state', 'getGroupsService', function($scope, $state, getGroupsService){
+		var usuario = JSON.parse(window.localStorage.getItem('usuario'));
+		$scope.usuario = usuario;
+		$scope.$watch(
+			getGroupsService.getGroups(usuario['id']).then(function(response){
+				groups = [];
+				for (variable of response.data) {
+					if (variable['fase'] == 'DISCUTINDO_IDEIAS') {
+						groups.push(variable);
+					}
+				}
+				console.log(groups);
+				$scope.groups = groups;
+				$scope.teste = !groups.length;
+			})
+		);
+
+		$scope.doRefresh = function() {
+			getGroupsService.getGroups(usuario['id']).then(function(response){
+				groups = [];
+				for (variable of response.data) {
+					if (variable['fase'] == 'DISCUTINDO_IDEIAS') {
+						groups.push(variable);
+					}
+				}
+				console.log(groups);
+				$scope.groups = groups;
+				$scope.teste = !groups.length;
+			})
+     .finally(function() {
+       // Stop the ion-refresher from spinning
+       $scope.$broadcast('scroll.refreshComplete');
+     });
+  	};
+
+	}])
+
+	.controller('EvaluationTabController', ['$scope', '$state', 'getGroupsService', function($scope, $state, getGroupsService){
+		var usuario = JSON.parse(window.localStorage.getItem('usuario'));
+		$scope.usuario = usuario;
+		$scope.$watch(
+			getGroupsService.getGroups(usuario['id']).then(function(response){
+				groups = [];
+				for (variable of response.data) {
+					if (variable['fase'] == 'AVALIANDO_IDEIAS') {
+						groups.push(variable);
+					}
+				}
+				console.log(groups);
+				$scope.groups = groups;
+				$scope.teste = !groups.length;
+			})
+		);
+
+		$scope.doRefresh = function() {
+			getGroupsService.getGroups(usuario['id']).then(function(response){
+				groups = [];
+				for (variable of response.data) {
+					if (variable['fase'] == 'AVALIANDO_IDEIAS') {
+						groups.push(variable);
+					}
+				}
+				console.log(groups);
+				$scope.groups = groups;
+				$scope.teste = !groups.length;
+			})
+     .finally(function() {
+       // Stop the ion-refresher from spinning
+       $scope.$broadcast('scroll.refreshComplete');
+     });
+  	};
+
+	}])
+
+	.controller('ClosedTabController', ['$scope', '$state', 'getGroupsService', function($scope, $state, getGroupsService){
+		var usuario = JSON.parse(window.localStorage.getItem('usuario'));
+		$scope.usuario = usuario;
+		$scope.$watch(
+			getGroupsService.getGroups(usuario['id']).then(function(response){
+				var groups = [];
+				for (variable of response.data) {
+					if (variable['fase'] == 'ENCERRADA') {
+						groups.push(variable);
+					}
+				}
+
+				var rank = [];
+				for (ideia of groups) {
+
+				}
+				console.log(groups);
+				$scope.groups = groups;
+				$scope.teste = !groups.length;
+			})
+		);
+
+		$scope.doRefresh = function() {
+			getGroupsService.getGroups(usuario['id']).then(function(response){
+				groups = [];
+				for (variable of response.data) {
+					if (variable['fase'] == 'ENCERRADA') {
+						groups.push(variable);
+					}
+				}
+				console.log(groups);
+				$scope.groups = groups;
+				$scope.teste = !groups.length;
+			})
+     .finally(function() {
+       // Stop the ion-refresher from spinning
+       $scope.$broadcast('scroll.refreshComplete');
+     });
+  	};
+
 	}])
 
 	.controller('ParticipantGroupSettingsController', ['$scope', '$stateParams', '$ionicHistory', 'getUniqueGroupService', function($scope, $stateParams, $ionicHistory, getUniqueGroupService){
@@ -94,7 +276,7 @@ angular.module("controllers",[])
 		});
 	}])
 
-	.controller('FacilitatorGroupSettingsController', ['$scope', '$stateParams', '$ionicHistory', 'getUniqueGroupService', 'updateUniqueGroupService', '$state', '$ionicModal', 'addParticipantService', function($scope, $stateParams, $ionicHistory, getUniqueGroupService, updateUniqueGroupService, $state, $ionicModal, addParticipantService){
+	.controller('FacilitatorGroupSettingsController', ['$scope', '$stateParams', '$ionicHistory', 'getUniqueGroupService', 'updateUniqueGroupService', '$state', '$ionicModal', 'addParticipantService', 'getPeopleService', function($scope, $stateParams, $ionicHistory, getUniqueGroupService, updateUniqueGroupService, $state, $ionicModal, addParticipantService, getPeopleService){
 		$scope.goBack = function() {
     	$ionicHistory.goBack();
   	};
@@ -108,6 +290,7 @@ angular.module("controllers",[])
 		$scope.save = function(group){
 			var usuario = JSON.parse(window.localStorage.getItem('usuario'));
 			group['facilitador'] = {'id': usuario['id'] };
+
 			console.log(group);
 
 			updateUniqueGroupService.setGroup(group).then(function(response){
@@ -116,9 +299,16 @@ angular.module("controllers",[])
 			});
 		};
 
-		$scope.add = function(participant, groupId){
-			addParticipantService.postParticipant(participant, groupId).then(function(response){
-				console.log(response);
+		$scope.add = function(participante, groupId){
+			getPeopleService.getPeople().then(function(response){
+				for (variable of response.data) {
+					if (variable.nome == participante) {
+						addParticipantService.postParticipant( variable.id, groupId).then(function(response){
+							console.log(response);
+						});
+						return 1;
+					}
+				}
 			});
 		};
 
@@ -134,7 +324,7 @@ angular.module("controllers",[])
 //----------------------------------------------------------------------------
 //table
 
-	.controller('TableController', ['$scope', '$stateParams', '$ionicHistory', 'getIdeasService', function($scope, $stateParams, $ionicHistory, getIdeasService){
+	.controller('TableController', ['$scope', '$stateParams', '$ionicHistory', 'getIdeasService', 'avaliarService', 'getUniqueGroupService', function($scope, $stateParams, $ionicHistory, getIdeasService, avaliarService, getUniqueGroupService){
 		$scope.goBack = function() {
 			$ionicHistory.goBack();
 		};
@@ -144,6 +334,29 @@ angular.module("controllers",[])
 			$scope.groupId = $stateParams.groupId;
 			console.log(response.data);
 		});
+
+		getUniqueGroupService.getGroup($stateParams.groupId).then(function(response){
+			$scope.grupo = response.data;
+			console.log(response.data);
+		});
+
+		$scope.avaliar = function(ideiaId){
+			var usuario = JSON.parse(window.localStorage.getItem('usuario'));
+			avaliarService.postAvaliacao(usuario['id'], ideiaId).then(function(response){
+			});
+		}
+
+		$scope.doRefresh = function() {
+			getIdeasService.getIdeas($stateParams.groupId).then(function(response){
+				$scope.ideias = response.data;
+				$scope.groupId = $stateParams.groupId;
+				console.log(response.data);
+			})
+     .finally(function() {
+       // Stop the ion-refresher from spinning
+       $scope.$broadcast('scroll.refreshComplete');
+     });
+  	};
 
 	}])
 
@@ -169,7 +382,6 @@ angular.module("controllers",[])
 
 	}])
 
-
 	.controller('NovaIdeiaController', ['$scope', '$state', '$stateParams', '$ionicHistory', 'addIdeaService', function($scope, $state, $stateParams, $ionicHistory, addIdeaService){
 		$scope.goBack = function() {
 			$ionicHistory.goBack();
@@ -188,5 +400,20 @@ angular.module("controllers",[])
 			});
 		}
 	}])
+
+.controller('RankController', ['$scope', '$stateParams', '$ionicHistory', 'getUniqueGroupService', function($scope, $stateParams, $ionicHistory, getUniqueGroupService){
+	$scope.goBack = function() {
+		$ionicHistory.goBack();
+	};
+
+	getUniqueGroupService.getGroup($stateParams.groupId).then(function(response){
+		$scope.ideias = response.data.ideias;
+		console.log(response.data.ideias);
+	});
+
+
+
+}])
+
 
 	;

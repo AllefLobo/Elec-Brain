@@ -1,22 +1,27 @@
+<div class="bar bar-header">
+  <button menu-toggle="left" class="button icon ion-navicon"></button>
+  <h1 class="title">Brainwriting Eletrônico</h1>
+</div>
+
 <ion-view title="Edit perfil">
     <ion-content padding="true" class="has-header">
         <form id="editPerfil-form8" class="list">
             <label class="item item-input" id="editPerfil-input13">
                 <span class="input-label">Nome</span>
-                <input type="text" placeholder="">
+                <input type="text" ng-model="nome" placeholder="Nome">
             </label>
-            <label class="item item-input" id="editPerfil-input14">
+            <!-- <label class="item item-input" id="editPerfil-input14">
                 <span class="input-label">Email</span>
                 <input type="email" placeholder="">
-            </label>
-            <label class="item item-input" id="editPerfil-input15">
+            </label> -->
+            <!-- <label class="item item-input" id="editPerfil-input15">
                 <span class="input-label">Senha</span>
                 <input type="password" placeholder="">
-            </label>
+            </label> -->
         </form>
         <div id="editPerfil-button-bar3" class="button-bar">
-            <a ui-sref="tabsController.openTabDefaultPage" id="editPerfil-button15" class="button button-positive  button-block icon ion-edit">Edit</a>
-            <a ui-sref="tabsController.openTabDefaultPage" id="editPerfil-button16" class="button button-positive  button-block icon ion-android-cancel">Cancelar</a>
+            <a ng-click="editar(nome)" id="editPerfil-button15" class="button button-positive  button-block icon ion-edit">Editar</a>
+            <a ui-sref="tab.openTab" id="editPerfil-button16" class="button button-positive  button-block icon ion-android-cancel">Cancelar</a>
         </div>
     </ion-content>
 </ion-view>

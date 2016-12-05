@@ -40,6 +40,12 @@ angular.module('starter', ['ionic', 'controllers', 'services'])
 			controller:'signupController'
     })
 
+		.state("editPerfil",{
+      url: "/editPerfil",
+      templateUrl:  "templates/editPerfil.html",
+			controller:'EditPerfilController'
+    })
+
 		.state("createGroup",{
       url: "/createGroup",
       templateUrl:  "templates/createGroup.html",
@@ -62,6 +68,12 @@ angular.module('starter', ['ionic', 'controllers', 'services'])
       url: "/table/:groupId",
       templateUrl:  "templates/table.html",
 			controller:'TableController'
+    })
+
+		.state("rank",{
+      url: "/rank/:groupId",
+      templateUrl:  "templates/rank.html",
+			controller:'RankController'
     })
 
 		.state("comentarios",{
@@ -104,19 +116,30 @@ angular.module('starter', ['ionic', 'controllers', 'services'])
         }
       }
     })
+		.state('tab.arguingTab', {
+      url: '/arguingTab',
+      views: {
+        'tab3': {
+          templateUrl: 'templates/tabContent/arguingTab.html',
+					controller: 'ArguingTabController'
+        }
+      }
+    })
     .state('tab.evaluationTab', {
       url: '/evaluationTab',
       views: {
-        'tab3': {
-          templateUrl: 'templates/tabContent/evaluationTab.html'
+        'tab4': {
+          templateUrl: 'templates/tabContent/evaluationTab.html',
+					controller: 'EvaluationTabController'
         }
       }
     })
     .state('tab.closedTab', {
       url: '/closedTab',
       views: {
-        'tab4': {
-          templateUrl: 'templates/tabContent/closedTab.html'
+        'tab5': {
+          templateUrl: 'templates/tabContent/closedTab.html',
+					controller: 'ClosedTabController'
         }
       }
     });

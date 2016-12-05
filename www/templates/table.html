@@ -1,16 +1,23 @@
 <div class="bar bar-header">
   <button class="button icon ion-arrow-left-c" ng-click="goBack()"></button>
-  <h1 class="title">Mesa de ideias</h1>
-	<button class="button button-clear button-positive" ui-sref="novaIdeia({groupId: groupId})">Nova</button>
+  <h1 class="title">{{grupo.gatilho}}</h1>
+	<button ng-hide="grupo.fase == 'AVALIANDO_IDEIAS'" class="button button-clear button-positive" ui-sref="novaIdeia({groupId: groupId})">Nova</button>
 </div>
+
+
 
 <ion-view title="Table">
     <ion-content padding="true" class="has-header">
+			<ion-refresher pulling-text="Puxe para atualizar" on-refresh="doRefresh()">
+		 </ion-refresher>
+
         <div class="item item-body" ng-repeat="ideia in ideias" >
 						<h3>Autor: {{ideia.autor.nome}}</h3>
-            <ion-list id="table-list6" >
-                <ion-item id="" >{{ideia.texto}}</ion-item>
-								<button class="button button-positive  button-block icon-left ion-android-search" ui-sref="comentarios({ideiaId: ideia.id})">Ver comentários</button>
+            <ion-list>
+                <ion-item>{{ideia.texto}}</ion-item>
+								<a id="like" ng-class="{'ion-ios-star': liked, 'ion-ios-star-outline': !liked}" ng-click="liked=!liked; avaliar(ideia.id)" ng-show="grupo.fase == 'AVALIANDO_IDEIAS'"></a><small ng-show="grupo.fase == 'AVALIANDO_IDEIAS'">Gostou? Marque a estrelinha</small>
+
+								<button class="button button-positive  button-block icon-left ion-android-search" ui-sref="comentarios({ideiaId: ideia.id})" ng-show="grupo.fase == 'DISCUTINDO_IDEIAS'">Ver comentários</button>
             </ion-list>
             <!-- <button class="button button-positive  button-block icon-left ion-android-add" ng-click="newComment.show()">Comentar</button> -->
         </div>
