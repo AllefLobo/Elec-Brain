@@ -1,9 +1,10 @@
 angular.module("services",[])
 
+
 .factory('getUniquePersonService', ['$http', function($http){
 	return {
 		getPerson: function(id){
-			return  $http.get('http://localhost:8080/CreativeAPI/pessoas/' + id);
+			return  $http.get('http://'+window.localStorage.getItem('endereco')+':8080/CreativeAPI/pessoas/' + id);
 		}
 	};
 }])
@@ -11,7 +12,7 @@ angular.module("services",[])
 .factory('getPeopleService', ['$http', function($http){
 	return {
 		getPeople: function(id){
-			return  $http.get('http://localhost:8080/CreativeAPI/pessoas');
+			return  $http.get('http://'+window.localStorage.getItem('endereco')+':8080/CreativeAPI/pessoas');
 		}
 	};
 }])
@@ -25,7 +26,7 @@ angular.module("services",[])
 
 		return $http({
 								method: 'POST',
-								url: 'http://localhost:8080/CreativeAPI/brainwriting/'+groupId+'/participante',
+								url: 'http://'+window.localStorage.getItem('endereco')+':8080/CreativeAPI/brainwriting/'+groupId+'/participante',
 								data: data,
 								headers: { 'Content-Type': "application/json;charset=UTF-8" }
 						})
@@ -45,7 +46,7 @@ angular.module("services",[])
 
 		return $http({
 								method: 'POST',
-								url: 'http://localhost:8080/CreativeAPI/pessoas',
+								url: 'http://'+window.localStorage.getItem('endereco')+':8080/CreativeAPI/pessoas',
 								data: data,
 								headers: { 'Content-Type': "application/json;charset=UTF-8" }
 						})
@@ -65,7 +66,7 @@ angular.module("services",[])
 
 		return $http({
 								method: 'POST',
-								url: 'http://localhost:8080/CreativeAPI/pessoas/' + id,
+								url: 'http://'+window.localStorage.getItem('endereco')+':8080/CreativeAPI/pessoas/' + id,
 								data: data,
 								headers: { 'Content-Type': "application/json;charset=UTF-8" }
 						})
@@ -81,7 +82,7 @@ angular.module("services",[])
 	.factory('getGroupsService', ['$http', function($http){
 		return {
     	getGroups: function(id){
-      	return  $http.get('http://localhost:8080/CreativeAPI/brainwriting?idPessoa='+ id);
+      	return  $http.get('http://'+window.localStorage.getItem('endereco')+':8080/CreativeAPI/brainwriting?idPessoa='+ id);
     	}
   	};
 	}])
@@ -89,7 +90,7 @@ angular.module("services",[])
 	.factory('getUniqueGroupService', ['$http', function($http){
 		return {
     	getGroup: function(id){
-      	return  $http.get('http://localhost:8080/CreativeAPI/brainwriting/' + id);
+      	return  $http.get('http://'+window.localStorage.getItem('endereco')+':8080/CreativeAPI/brainwriting/' + id);
     	}
   	};
 	}])
@@ -99,7 +100,7 @@ angular.module("services",[])
     	setGroup: function(grupo){
 			return $http({
 			            method: 'POST',
-			            url: 'http://localhost:8080/CreativeAPI/brainwriting/'+ grupo['id'],
+			            url: 'http://'+window.localStorage.getItem('endereco')+':8080/CreativeAPI/brainwriting/'+ grupo['id'],
 			            data: {
 									  "titulo": grupo['titulo'],
 									  "gatilho": grupo['gatilho'],
@@ -127,7 +128,7 @@ angular.module("services",[])
 
 			return $http({
 			            method: 'POST',
-			            url: 'http://localhost:8080/CreativeAPI/brainwriting',
+			            url: 'http://'+window.localStorage.getItem('endereco')+':8080/CreativeAPI/brainwriting',
 			            data: data,
 			            headers: { 'Content-Type': "application/json;charset=UTF-8" }
 			        })
@@ -141,7 +142,7 @@ angular.module("services",[])
 	.factory('getIdeasService', ['$http', function($http){
 		return {
 			getIdeas: function(id){
-				return  $http.get('http://localhost:8080/CreativeAPI/brainwriting/'+ id +'/ideia');
+				return  $http.get('http://'+window.localStorage.getItem('endereco')+':8080/CreativeAPI/brainwriting/'+ id +'/ideia');
 			}
 		};
 	}])
@@ -149,7 +150,7 @@ angular.module("services",[])
 	.factory('getIdeaService', ['$http', function($http){
 		return {
 			getIdea: function(id){
-				return  $http.get('http://localhost:8080/CreativeAPI/brainwriting/ideia/'+ id);
+				return  $http.get('http://'+window.localStorage.getItem('endereco')+':8080/CreativeAPI/brainwriting/ideia/'+ id);
 			}
 		};
 	}])
@@ -188,7 +189,7 @@ angular.module("services",[])
 
 			return $http({
 									method: 'POST',
-									url: 'http://localhost:8080/CreativeAPI/brainwriting/'+ group +'/ideia',
+									url: 'http://'+window.localStorage.getItem('endereco')+':8080/CreativeAPI/brainwriting/'+ group +'/ideia',
 									data: data,
 									headers: { 'Content-Type': "application/json;charset=UTF-8" }
 							})
@@ -229,7 +230,7 @@ angular.module("services",[])
 
 			return $http({
 									method: 'POST',
-									url: 'http://localhost:8080/CreativeAPI/brainwriting/ideia/'+ideiaId+'/comentario',
+									url: 'http://'+window.localStorage.getItem('endereco')+':8080/CreativeAPI/brainwriting/ideia/'+ideiaId+'/comentario',
 									data: data,
 									headers: { 'Content-Type': "application/json;charset=UTF-8" }
 							})
@@ -240,7 +241,7 @@ angular.module("services",[])
 	.factory('getCommentsService', ['$http', function($http){
 		return {
 			getComments: function(id){
-				return  $http.get('http://localhost:8080/CreativeAPI/brainwriting/ideia/'+ id);
+				return  $http.get('http://'+window.localStorage.getItem('endereco')+':8080/CreativeAPI/brainwriting/ideia/'+ id);
 			}
 		};
 	}])
@@ -257,7 +258,7 @@ angular.module("services",[])
 
 			return $http({
 									method: 'POST',
-									url: 'http://localhost:8080/CreativeAPI/brainwriting/ideia/'+ideiaId+'/avaliacao',
+									url: 'http://'+window.localStorage.getItem('endereco')+':8080/CreativeAPI/brainwriting/ideia/'+ideiaId+'/avaliacao',
 									data: data,
 									headers: { 'Content-Type': "application/json;charset=UTF-8" }
 							})

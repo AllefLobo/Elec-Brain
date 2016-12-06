@@ -11,6 +11,10 @@
                     <span class="input-label">Usuario</span>
                     <input type="text" placeholder="Usuário" ng-model="nome" value="asdas">
                 </label>
+								<label class="item item-input" id="login-input1">
+                    <span class="input-label">Endereço IP</span>
+                    <input type="text" placeholder="IP" ng-model="endereco" value="asdas">
+                </label>
                 <!-- <label class="item item-input" id="login-input2">
                     <span class="input-label">Senha</span>
                     <input type="password" placeholder="Senha" ng-model="data.password">
@@ -18,7 +22,7 @@
             </ion-list>
             <div class="spacer" style="height: 40px;"></div>
 						<!-- ng-click="login()" -->
-            <a id="login-button1" class="button button-stable  button-block" ng-click="login(nome)" >Entrar</a>
+            <a id="login-button1" class="button button-stable  button-block" ng-click="login(nome, endereco)" >Entrar</a>
             <a ui-sref="signup" id="login-button2" class="button button-positive  button-block button-clear">Ou crie uma conta</a>
         </form>
     </ion-content>

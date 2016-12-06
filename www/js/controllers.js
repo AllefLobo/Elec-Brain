@@ -28,7 +28,9 @@ angular.module("controllers",[])
 	}])
 
 	.controller('LoginController',['$scope', '$state', 'getPeopleService', function($scope, $state, getPeopleService){
-		$scope.login = function(nome){
+		$scope.login = function(nome, endereco){
+			window.localStorage.setItem('endereco', endereco);
+			
 			getPeopleService.getPeople().then(function(response){
 				for (variable of response.data) {
 					if (variable.nome == nome) {
