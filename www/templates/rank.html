@@ -11,7 +11,7 @@
 
             <ion-list class="item-icon-right" ng-repeat="ideia in ideias | orderBy: '-numeroAvaliacoes'">
                 <ion-item  class="item-icon-right" id="rank-list-item24">{{ideia.texto}}
-									<i class="icon ion-ribbon-a"></i>
+									<i class="icon ion-ribbon-a">{{ideia.numeroAvaliacoes}}</i>
                 </ion-item>
             </ion-list>
         </div>

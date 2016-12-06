@@ -15,7 +15,7 @@
 						<h3>Autor: {{ideia.autor.nome}}</h3>
             <ion-list>
                 <ion-item>{{ideia.texto}}</ion-item>
-								<a id="like" ng-class="{'ion-ios-star': liked, 'ion-ios-star-outline': !liked}" ng-click="liked=!liked; avaliar(ideia.id)" ng-show="grupo.fase == 'AVALIANDO_IDEIAS'"></a><small ng-show="grupo.fase == 'AVALIANDO_IDEIAS'">Gostou? Marque a estrelinha</small>
+								<a id="like" ng-class="{'ion-ios-star': liked, 'ion-ios-star-outline': !liked}" ng-click="liked||avaliar(ideia.id); liked= true" ng-show="grupo.fase == 'AVALIANDO_IDEIAS'"></a><small ng-show="grupo.fase == 'AVALIANDO_IDEIAS'">Gostou? Marque a estrelinha</small>
 
 								<button class="button button-positive  button-block icon-left ion-android-search" ui-sref="comentarios({ideiaId: ideia.id})" ng-show="grupo.fase == 'DISCUTINDO_IDEIAS'">Ver comentários</button>
             </ion-list>

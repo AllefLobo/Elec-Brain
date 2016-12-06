@@ -296,6 +296,7 @@ angular.module("controllers",[])
 			updateUniqueGroupService.setGroup(group).then(function(response){
 				console.log(response.data);
 				$state.go('tab.openTab');
+				window.location.reload();
 			});
 		};
 
@@ -327,7 +328,9 @@ angular.module("controllers",[])
 	.controller('TableController', ['$scope', '$stateParams', '$ionicHistory', 'getIdeasService', 'avaliarService', 'getUniqueGroupService', function($scope, $stateParams, $ionicHistory, getIdeasService, avaliarService, getUniqueGroupService){
 		$scope.goBack = function() {
 			$ionicHistory.goBack();
+			window.location.reload();
 		};
+
 
 		getIdeasService.getIdeas($stateParams.groupId).then(function(response){
 			$scope.ideias = response.data;
@@ -363,6 +366,7 @@ angular.module("controllers",[])
 	.controller('CommentsController', ['$scope', '$stateParams', '$ionicHistory', 'getCommentsService', 'addCommentService', function($scope, $stateParams, $ionicHistory, getCommentsService, addCommentService){
 
 		$scope.goBack = function() {
+			window.location.reload();
 			$ionicHistory.goBack();
 		};
 
@@ -376,6 +380,8 @@ angular.module("controllers",[])
 
 			addCommentService.postComment( usuario['id'], $stateParams.ideiaId, texto).then(function(response){
 				console.log('deu certo');
+				window.location.reload();
+				$ionicHistory.goBack();
 			});
 		}
 
@@ -384,6 +390,7 @@ angular.module("controllers",[])
 
 	.controller('NovaIdeiaController', ['$scope', '$state', '$stateParams', '$ionicHistory', 'addIdeaService', function($scope, $state, $stateParams, $ionicHistory, addIdeaService){
 		$scope.goBack = function() {
+			window.location.reload();
 			$ionicHistory.goBack();
 		};
 
@@ -397,6 +404,8 @@ angular.module("controllers",[])
 			addIdeaService.postIdea(autor, $stateParams.groupId, ideia).then(function(response){
 				console.log(response);
 				console.log('go back aki');
+				window.location.reload();
+				$ionicHistory.goBack();
 			});
 		}
 	}])
